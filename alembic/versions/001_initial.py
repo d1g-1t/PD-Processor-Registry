@@ -1,4 +1,4 @@
-"""001 – initial schema for PrivacyOps 152-FZ Control Tower.
+"""001 – initial schema for PD-Processor-Registry.
 
 Revision ID: 001_initial
 Revises: None

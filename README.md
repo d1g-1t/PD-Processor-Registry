@@ -1,6 +1,6 @@
-# PrivacyOps 152-FZ Control Tower 🏗️
+# PD-Processor-Registry 🏗️
 
-> Enterprise privacy governance platform for Russian Federal Law 152-FZ compliance.
+> Processor Data Processing Registry — governance platform for Russian Federal Law 152-FZ compliance.
 > Clean Architecture · DDD · Hexagonal Ports & Adapters · FastAPI · SQLAlchemy 2 async
 
 ---
