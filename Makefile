@@ -1,7 +1,7 @@
 .PHONY: setup up down test lint migrate shell logs seed clean
 
 # ------------------------------------------------------------------
-# PD-Processor-Registry  —  developer commands
+# PrivacyOps 152-FZ Control Tower  —  developer commands
 # ------------------------------------------------------------------
 # Non-standard ports (won't clash with your main projects):
 #   API       → 8700

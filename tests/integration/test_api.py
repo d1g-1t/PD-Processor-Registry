@@ -93,7 +93,7 @@ async def test_openapi_schema_present(app, client: AsyncClient):
     resp = await client.get("/openapi.json")
     if resp.status_code == 200:
         schema = resp.json()
-        assert "PD-Processor-Registry" in schema["info"]["title"]
+        assert "PrivacyOps" in schema["info"]["title"]
 
 
 # ─────────────────────────────────────────────────────────────────────

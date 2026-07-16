@@ -10,7 +10,7 @@ from src.core.config import get_settings
 settings = get_settings()
 
 celery_app = Celery(
-    "pd-processor-registry",
+    "privacyops",
     broker=settings.redis_url,
     backend=settings.redis_url,
 )
