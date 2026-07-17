@@ -18,13 +18,13 @@
 # Full project build from scratch after git clone
 setup:
 	@echo ">>> Copying env file..."
-	@if not exist .env copy .env.example .env
+	@if [ ! -f .env ]; then cp .env.example .env; fi
 	@echo ">>> Building Docker images..."
 	docker compose build
 	@echo ">>> Starting infrastructure..."
 	docker compose up -d postgres redis
 	@echo ">>> Waiting for Postgres to become healthy..."
-	@timeout /t 10 /nobreak >nul 2>&1 || true
+	@sleep 10
 	@echo ">>> Running Alembic migrations..."
 	docker compose run --rm api alembic upgrade head
 	@echo ">>> Starting all services..."
