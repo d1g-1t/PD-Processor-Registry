@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Обработка кадровых данных сотрудников",
+    "purpose": "Управление персоналом, кадровый учёт, расчёт заработной платы",
+    "legal_basis": "CONTRACT",
+    "article_reference": "ТК РФ ст. 86",
+    "data_categories": ["full_name", "birth_date", "snils", "inn", "bank_details", "address"],
+    "subject_categories": ["employees"],
+    "storage_location": "RU-MOSCOW",
+    "retention_days": 1825,
+    "status": "ACTIVE",
+    "risk_level": "MEDIUM",
+    "notes": "Обязательная обработка для соблюдения требований трудового законодательства"
+  },
+  {
+    "name": "Регистрация и аутентификация пользователей",
+    "purpose": "Предоставление доступа к сервису, управление учётными записями",
+    "legal_basis": "CONTRACT",
+    "article_reference": "152-ФЗ ст. 6 ч. 1 п. 5",
+    "data_categories": ["email", "phone", "full_name", "password_hash"],
+    "subject_categories": ["registered_users"],
+    "storage_location": "RU-NOVOSIBIRSK",
+    "retention_days": 1095,
+    "status": "ACTIVE",
+    "risk_level": "LOW"
+  },
+  {
+    "name": "Маркетинговые рассылки и push-уведомления",
+    "purpose": "Информирование о новых продуктах, акциях и специальных предложениях",
+    "legal_basis": "CONSENT",
+    "article_reference": "152-ФЗ ст. 9",
+    "data_categories": ["email", "phone", "preferences"],
+    "subject_categories": ["subscribers", "registered_users"],
+    "storage_location": "RU-MOSCOW",
+    "retention_days": 365,
+    "status": "ACTIVE",
+    "risk_level": "LOW",
+    "notes": "Требует явного согласия субъекта. Предусмотрена возможность отписки в каждом письме."
+  },
+  {
+    "name": "Аналитика поведения пользователей",
+    "purpose": "Улучшение пользовательского опыта, оценка эффективности интерфейсов",
+    "legal_basis": "LEGITIMATE_INTEREST",
+    "article_reference": "152-ФЗ ст. 6 ч. 1 п. 5",
+    "data_categories": ["ip_address", "cookie", "clickstream", "device_fingerprint"],
+    "subject_categories": ["website_visitors", "registered_users"],
+    "storage_location": "RU-MOSCOW",
+    "retention_days": 90,
+    "status": "ACTIVE",
+    "risk_level": "LOW",
+    "notes": "Применяется псевдонимизация. IP-адреса усекаются до /24 перед сохранением."
+  },
+  {
+    "name": "Обработка платёжных данных",
+    "purpose": "Проведение платёжных транзакций, соблюдение требований PCI DSS",
+    "legal_basis": "CONTRACT",
+    "article_reference": "ФЗ-161 ст. 8",
+    "data_categories": ["card_last4", "payment_token", "billing_address"],
+    "subject_categories": ["paying_customers"],
+    "storage_location": "RU-SPB",
+    "retention_days": 1825,
+    "status": "ACTIVE",
+    "risk_level": "HIGH",
+    "notes": "Хранятся только токены платёжного провайдера. Полные реквизиты карт не хранятся (PCI DSS scope)."
+  }
+]
