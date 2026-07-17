@@ -20,7 +20,7 @@ class Settings(BaseSettings):
 
     # ── postgres ─────────────────────────────────────────────────
     postgres_host: str = "postgres"
-    postgres_port: int = 5700
+    postgres_port: int = 5432
     postgres_db: str = "privacyops"
     postgres_user: str = "pops"
     postgres_password: str = "pops"
@@ -41,7 +41,7 @@ class Settings(BaseSettings):
 
     # ── redis ────────────────────────────────────────────────────
     redis_host: str = "redis"
-    redis_port: int = 6700
+    redis_port: int = 6379
     redis_password: str = "change-me-redis-secret"
 
     @property
