@@ -7,13 +7,57 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# ---- deps stage ----
+# ---- deps stage: install dependencies only (no project build) ----
 FROM base AS deps
 COPY pyproject.toml ./
 RUN pip install --upgrade pip setuptools wheel && \
-    pip install ".[dev]"
+    pip install --no-cache-dir \
+        fastapi[standard] \
+        uvicorn[standard] \
+        sqlalchemy[asyncio] \
+        asyncpg \
+        alembic \
+        redis[hiredis] \
+        celery[redis] \
+        flower \
+        httpx[http2] \
+        pydantic \
+        pydantic-settings \
+        dependency-injector \
+        structlog \
+        pyseto \
+        passlib[bcrypt] \
+        prometheus-client \
+        prometheus-fastapi-instrumentator \
+        opentelemetry-sdk \
+        opentelemetry-api \
+        opentelemetry-exporter-otlp \
+        opentelemetry-instrumentation-fastapi \
+        opentelemetry-instrumentation-sqlalchemy \
+        opentelemetry-instrumentation-httpx \
+        opentelemetry-instrumentation-redis \
+        opentelemetry-instrumentation-celery \
+        langchain \
+        langchain-community \
+        langchain-ollama \
+        orjson \
+        tenacity \
+        slowapi \
+        python-dateutil \
+        pytest \
+        pytest-asyncio \
+        pytest-cov \
+        testcontainers[postgresql,redis] \
+        respx \
+        faker \
+        hypothesis \
+        ruff \
+        mypy \
+        bandit \
+        safety \
+        pre-commit
 
-# ---- runtime stage ----
+# ---- runtime stage: copy source + install project in editable mode ----
 FROM deps AS runtime
 COPY . .
 RUN pip install -e ".[dev]" --no-deps
