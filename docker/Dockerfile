@@ -3,7 +3,8 @@ FROM python:3.12-slim AS base
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONPATH=/app
 
 WORKDIR /app
 
@@ -60,6 +61,6 @@ RUN pip install --upgrade pip setuptools wheel && \
 # ---- runtime stage: copy source + install project in editable mode ----
 FROM deps AS runtime
 COPY . .
-RUN pip install -e ".[dev]" --no-deps
+RUN pip install ".[dev]" --no-deps
 EXPOSE 8700
 CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8700"]
