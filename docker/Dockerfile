@@ -16,5 +16,6 @@ RUN pip install --upgrade pip setuptools wheel && \
 # ---- runtime stage ----
 FROM deps AS runtime
 COPY . .
+RUN pip install -e ".[dev]" --no-deps
 EXPOSE 8700
 CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8700"]
