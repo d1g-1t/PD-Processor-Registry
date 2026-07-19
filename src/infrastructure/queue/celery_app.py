@@ -10,7 +10,7 @@ from src.core.config import get_settings
 settings = get_settings()
 
 celery_app = Celery(
-    "privacyops",
+    "pd_processor_registry",
     broker=settings.redis_url,
     backend=settings.redis_url,
 )
@@ -25,12 +25,12 @@ celery_app.conf.update(
     task_acks_late=True,
     worker_prefetch_multiplier=1,
     task_routes={
-        "src.infrastructure.queue.tasks.activity_tasks.*": {"queue": "privacy.registry"},
-        "src.infrastructure.queue.tasks.dsr_tasks.*": {"queue": "privacy.dsr"},
-        "src.infrastructure.queue.tasks.consent_tasks.*": {"queue": "privacy.monitoring"},
-        "src.infrastructure.queue.tasks.processor_tasks.*": {"queue": "privacy.monitoring"},
-        "src.infrastructure.queue.tasks.incident_tasks.*": {"queue": "privacy.incidents"},
-        "src.infrastructure.queue.tasks.analytics_tasks.*": {"queue": "privacy.analytics"},
+        "src.infrastructure.queue.tasks.activity_tasks.*": {"queue": "pd.registry"},
+        "src.infrastructure.queue.tasks.dsr_tasks.*": {"queue": "pd.dsr"},
+        "src.infrastructure.queue.tasks.consent_tasks.*": {"queue": "pd.monitoring"},
+        "src.infrastructure.queue.tasks.processor_tasks.*": {"queue": "pd.monitoring"},
+        "src.infrastructure.queue.tasks.incident_tasks.*": {"queue": "pd.incidents"},
+        "src.infrastructure.queue.tasks.analytics_tasks.*": {"queue": "pd.analytics"},
     },
     beat_schedule={
         "dsr-sla-scan": {
