@@ -1,4 +1,4 @@
-"""PrivacyOps 152-FZ Control Tower — FastAPI application factory."""
+"""PD-Processor-Registry — FastAPI application factory."""
 
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     setup_logging()
     logger.info(
         "starting",
-        service="privacyops-152fz-control-tower",
+        service="pd-processor-registry",
         debug=getattr(settings, "app_env", "dev"),
     )
 
@@ -50,7 +50,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        title="PrivacyOps 152-FZ Control Tower",
+        title="PD-Processor-Registry",
         description="Enterprise privacy governance platform for Russian 152-FZ compliance",
         version="0.1.0",
         default_response_class=ORJSONResponse,
