@@ -12,8 +12,8 @@ services:
       redis: { condition: service_healthy }
     environment:
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4700
-      OTEL_SERVICE_NAME: privacyops-api
-    networks: [privacyops]
+      OTEL_SERVICE_NAME: pd-processor-registry-api
+    networks: [pd_processor_registry]
 
   worker:
     build:
@@ -28,8 +28,8 @@ services:
     depends_on: [postgres, redis]
     environment:
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4700
-      OTEL_SERVICE_NAME: privacyops-worker
-    networks: [privacyops]
+      OTEL_SERVICE_NAME: pd-processor-registry-worker
+    networks: [pd_processor_registry]
 
   beat:
     build:
@@ -39,22 +39,22 @@ services:
     command: celery -A src.infrastructure.queue.celery_app beat --loglevel=info
     env_file: .env
     depends_on: [redis, postgres]
-    networks: [privacyops]
+    networks: [pd_processor_registry]
 
   postgres:
     image: postgres:16
     environment:
-      POSTGRES_DB: privacyops
+      POSTGRES_DB: pd_processor_registry
       POSTGRES_USER: pops
       POSTGRES_PASSWORD: pops
     ports: ["5700:5432"]
     volumes: [postgres_data:/var/lib/postgresql/data]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pops -d privacyops"]
+      test: ["CMD-SHELL", "pg_isready -U pops -d pd_processor_registry"]
       interval: 5s
       timeout: 3s
       retries: 20
-    networks: [privacyops]
+    networks: [pd_processor_registry]
 
   redis:
     image: redis:7-alpine
@@ -65,28 +65,28 @@ services:
       interval: 5s
       timeout: 3s
       retries: 20
-    networks: [privacyops]
+    networks: [pd_processor_registry]
 
   ollama:
     image: ollama/ollama:latest
     ports: ["11700:11434"]
     volumes:
       - ollama_data:/root/.ollama
-    networks: [privacyops]
+    networks: [pd_processor_registry]
 
   flower:
     image: mher/flower:2.0
     command: celery --broker=redis://:${REDIS_PASSWORD:-change-me-redis-secret}@redis:6379/0 flower --port=5701
     ports: ["5701:5701"]
     depends_on: [redis]
-    networks: [privacyops]
+    networks: [pd_processor_registry]
 
   prometheus:
     image: prom/prometheus:v2.51.0
     ports: ["9700:9090"]
     volumes:
       - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-    networks: [privacyops]
+    networks: [pd_processor_registry]
 
   tempo:
     image: grafana/tempo:2.4.0
@@ -95,7 +95,7 @@ services:
     volumes:
       - ./docker/tempo/tempo.yml:/etc/tempo.yaml:ro
       - tempo_data:/var/tempo
-    networks: [privacyops]
+    networks: [pd_processor_registry]
 
   loki:
     image: grafana/loki:2.9.8
@@ -103,7 +103,7 @@ services:
     ports: ["3701:3100"]
     volumes:
       - ./docker/loki/local-config.yaml:/etc/loki/local-config.yaml:ro
-    networks: [privacyops]
+    networks: [pd_processor_registry]
 
   grafana:
     image: grafana/grafana:10.4.0
@@ -113,7 +113,7 @@ services:
       - ./docker/grafana/provisioning:/etc/grafana/provisioning
       - ./docker/grafana/dashboards:/var/lib/grafana/dashboards
     depends_on: [prometheus, tempo, loki]
-    networks: [privacyops]
+    networks: [pd_processor_registry]
 
 volumes:
   postgres_data:
@@ -122,5 +122,5 @@ volumes:
   grafana_data:
 
 networks:
-  privacyops:
+  pd_processor_registry:
     driver: bridge
