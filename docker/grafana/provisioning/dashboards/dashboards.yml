@@ -1,9 +1,9 @@
 apiVersion: 1
 
 providers:
-  - name: PrivacyOps
+  - name: PD-Processor-Registry
     orgId: 1
-    folder: PrivacyOps
+    folder: PD-Processor-Registry
     type: file
     disableDeletion: false
     editable: true
