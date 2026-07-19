@@ -1,7 +1,7 @@
 [project]
-name = "privacyops-152fz-control-tower"
+name = "pd-processor-registry"
 version = "0.1.0"
-description = "Enterprise PrivacyOps platform for Russian 152-FZ compliance"
+description = "Enterprise privacy governance platform for Russian 152-FZ compliance"
 requires-python = ">=3.12"
 
 dependencies = [
