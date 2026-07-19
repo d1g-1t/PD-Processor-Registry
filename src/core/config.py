@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     # ── postgres ─────────────────────────────────────────────────
     postgres_host: str = "postgres"
     postgres_port: int = 5432
-    postgres_db: str = "privacyops"
+    postgres_db: str = "pd_processor_registry"
     postgres_user: str = "pops"
     postgres_password: str = "pops"
 
@@ -66,7 +66,7 @@ class Settings(BaseSettings):
 
     # ── observability ────────────────────────────────────────────
     otel_exporter_otlp_endpoint: str = "http://tempo:4700"
-    otel_service_name: str = "privacyops-api"
+    otel_service_name: str = "pd-processor-registry-api"
     enable_log_masking: bool = True
 
     # ── CORS ─────────────────────────────────────────────────────
