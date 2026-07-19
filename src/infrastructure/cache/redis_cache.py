@@ -28,7 +28,7 @@ class RedisCache:
         return self._pool
 
     def _key(self, namespace: str, key: str) -> str:
-        return f"privacyops:{namespace}:{key}"
+        return f"pd_processor_registry:{namespace}:{key}"
 
     async def get(self, namespace: str, key: str) -> Any | None:
         pool = await self._get_pool()
@@ -49,7 +49,7 @@ class RedisCache:
 
     async def invalidate_namespace(self, namespace: str) -> int:
         pool = await self._get_pool()
-        pattern = f"privacyops:{namespace}:*"
+        pattern = f"pd_processor_registry:{namespace}:*"
         count = 0
         async for key in pool.scan_iter(match=pattern, count=100):
             await pool.delete(key)
