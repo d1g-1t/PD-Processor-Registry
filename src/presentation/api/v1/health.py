@@ -15,7 +15,7 @@ async def health_check(request: Request):
     """Basic liveness probe."""
     return {
         "status": "ok",
-        "service": "privacyops-152fz-control-tower",
+        "service": "pd-processor-registry",
         "timestamp": datetime.now(UTC).isoformat(),
     }
 
