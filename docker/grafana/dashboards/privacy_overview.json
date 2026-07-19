@@ -1,7 +1,7 @@
 {
   "dashboard": {
     "title": "PD-Processor-Registry Overview",
-    "uid": "privacyops-overview",
+    "uid": "pd-processor-registry-overview",
     "panels": [
       {
         "title": "Open DSRs",
